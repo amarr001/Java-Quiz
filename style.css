@@ -1,0 +1,47 @@
+
+* {
+    box-sizing: border-box;
+}
+
+.container{
+text-align: center;
+margin: auto;
+padding: 100px;
+
+}
+
+#quizChoice{
+    padding-top: 20px;
+}
+
+.nowrap {
+    
+    white-space: nowrap;
+
+}
+.btnStart{
+    background-color: cornflowerblue;
+    color: cornsilk;
+}
+.highScore{
+
+    position: absolute;
+    top: 0.5cm;
+    left: 0.5cm;
+    text-align: left;
+    
+
+}
+.Timer{
+
+    position: absolute;
+    top: 0.5cm;
+    right: 2cm;
+    text-align: right;
+    
+}
+@media only screen and (max-width: 600px) {
+
+    max-width: 100%;
+
+}
