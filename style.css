@@ -23,23 +23,32 @@ padding: 100px;
     background-color: cornflowerblue;
     color: cornsilk;
 }
-.highScore{
-
-    position: absolute;
-    top: 0.5cm;
-    left: 0.5cm;
-    text-align: left;
-    
-
-}
-.Timer{
-
-    position: absolute;
-    top: 0.5cm;
-    right: 2cm;
-    text-align: right;
+.btnSubmit{
+    background-color: cornflowerblue;
+    color: cornsilk;
     
 }
+
+.btnAgain{
+    align-content: center;
+    margin-top: 50px;
+}
+
+#countScore{
+    position: absolute;
+    top: 8px;
+    left: 50px;
+
+}
+#Timer{
+    position: absolute;
+    top: 8px;
+    right: 70px;
+
+}
+
+
+
 @media only screen and (max-width: 600px) {
 
     max-width: 100%;
