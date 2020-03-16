@@ -7,13 +7,15 @@ const initialPage = document.getElementById("initialPage");
 const timer = document.getElementById("timer");
 var count;
 
-
+//click event listeners and question index increment//
 let shuffledQuestions, currentQuestionIndex
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
   currentQuestionIndex++
   setNextQuestion()
 })
+
+//when startButton is pressed - game starts and so does the timer//
 
 function startGame() {
 
@@ -28,7 +30,7 @@ function startGame() {
  
   
 }
-
+//Next question and resetting classes//
 function setNextQuestion() {
   resetState()
   showQuestion(shuffledQuestions[currentQuestionIndex])
@@ -57,6 +59,8 @@ function resetState() {
   }
 }
 
+//when answer button is selected
+
 function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
@@ -66,7 +70,7 @@ function selectAnswer(e) {
   })
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
-  } else {
+  } else { //when user finish selcting all questions
     startButton.innerText = "Restart";
     startButton.classList.remove("hide");
     initialPage.innerHTML = "Thank you!";
@@ -95,6 +99,8 @@ function clearStatusClass(element) {
   element.classList.remove('correct')
   element.classList.remove('wrong')
 }
+
+//question and answer object
 
 const questions = [
   {
@@ -131,9 +137,9 @@ const questions = [
   }
 ]
 
-// Set the date we're counting down to
+// Set the timer interval and initial count variable
 function startTime(){ 
-count = 20;
+count = 40;
 var interval = setInterval(function(){
   document.getElementById('timer').innerHTML= count;
   count--;
