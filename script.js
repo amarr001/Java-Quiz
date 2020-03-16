@@ -4,6 +4,7 @@ const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 const initialPage = document.getElementById("initialPage");
+const timer = document.getElementById("timer");
 
 
 let shuffledQuestions, currentQuestionIndex
@@ -14,13 +15,16 @@ nextButton.addEventListener('click', () => {
 })
 
 function startGame() {
+
   initialPage.classList.add('hide')
+  timer.classList.remove("hide")
   startButton.classList.add('hide')
   shuffledQuestions = questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0
   questionContainerElement.classList.remove('hide')
-  setNextQuestion();
-  startTimer();
+  setNextQuestion()
+  startTime();
+ 
   
 }
 
@@ -66,6 +70,7 @@ function selectAnswer(e) {
     initialPage.innerHTML = "Thank you!";
     initialPage.classList.remove("hide");
     questionContainerElement.classList.add("hide");
+   
   }
 }
 
@@ -118,19 +123,19 @@ const questions = [
   }
 ]
 
-var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
-function startTimer(){
-var x = setInterval(function() {
-  var now = new Date().getTime();
-  var distance = countDownDate - now;
-  var seconds = Math.floor((distance % (1000 * 15)) / 1000);
-  document.getElementById("timer").innerHTML = "Time remaining: " + seconds + "s ";
+// Set the date we're counting down to
+function startTime(){ 
+var count = 15;
+var interval = setInterval(function(){
+  document.getElementById('timer').innerHTML=count;
+  count--;
+  if (count === 0){
+    clearInterval(interval);
+    document.getElementById('timer').innerHTML='Done';
+    // or...
+    alert("You're out of time!");
+  }
 }, 1000);
-if (distance <= 0) {
-  clearInterval(x);
-  document.getElementById("timer").innerHTML = "Time is up!";
-  
 }
 
-}
 
