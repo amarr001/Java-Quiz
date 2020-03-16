@@ -19,7 +19,8 @@ function startGame() {
   shuffledQuestions = questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0
   questionContainerElement.classList.remove('hide')
-  setNextQuestion()
+  setNextQuestion();
+  startTimer();
   
 }
 
@@ -60,8 +61,11 @@ function selectAnswer(e) {
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
   } else {
-    startButton.innerText = 'Restart'
-    startButton.classList.remove('hide')
+    startButton.innerText = "Restart";
+    startButton.classList.remove("hide");
+    initialPage.innerHTML = "Thank you!";
+    initialPage.classList.remove("hide");
+    questionContainerElement.classList.add("hide");
   }
 }
 
@@ -113,4 +117,20 @@ const questions = [
     ]
   }
 ]
+
+var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+function startTimer(){
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
+  var seconds = Math.floor((distance % (1000 * 15)) / 1000);
+  document.getElementById("timer").innerHTML = "Time remaining: " + seconds + "s ";
+}, 1000);
+if (distance <= 0) {
+  clearInterval(x);
+  document.getElementById("timer").innerHTML = "Time is up!";
+  
+}
+
+}
 
