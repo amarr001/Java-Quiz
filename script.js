@@ -5,6 +5,7 @@ const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 const initialPage = document.getElementById("initialPage");
 const timer = document.getElementById("timer");
+var count;
 
 
 let shuffledQuestions, currentQuestionIndex
@@ -44,6 +45,7 @@ function showQuestion(question) {
     }
     button.addEventListener('click', selectAnswer)
     answerButtonsElement.appendChild(button)
+   
   })
 }
 
@@ -70,7 +72,12 @@ function selectAnswer(e) {
     initialPage.innerHTML = "Thank you!";
     initialPage.classList.remove("hide");
     questionContainerElement.classList.add("hide");
-   
+    count = 0
+  }
+  if(correct){
+    count = count;
+  }else{
+    count = count -5;
   }
 }
 
@@ -78,6 +85,7 @@ function setStatusClass(element, correct) {
   clearStatusClass(element)
   if (correct) {
     element.classList.add('correct')
+  
   } else {
     element.classList.add('wrong')
   }
@@ -125,17 +133,25 @@ const questions = [
 
 // Set the date we're counting down to
 function startTime(){ 
-var count = 15;
+count = 20;
 var interval = setInterval(function(){
-  document.getElementById('timer').innerHTML=count;
+  document.getElementById('timer').innerHTML= count;
   count--;
-  if (count === 0){
+
+
+  if (count <= 0) {
     clearInterval(interval);
     document.getElementById('timer').innerHTML='Done';
-    // or...
-    alert("You're out of time!");
+    //startButton.innerText = "Restart";
+    startButton.classList.remove("hide");
+    initialPage.innerHTML = "Thank you!";
+    initialPage.classList.remove("hide");
+    questionContainerElement.classList.add("hide");
+    
+     
   }
 }, 1000);
 }
+
 
 
