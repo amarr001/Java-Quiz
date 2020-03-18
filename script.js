@@ -1,21 +1,24 @@
-const startButton = document.getElementById('start-btn')
-const nextButton = document.getElementById('next-btn')
-const questionContainerElement = document.getElementById('question-container')
-const questionElement = document.getElementById('question')
-const answerButtonsElement = document.getElementById('answer-buttons')
+const startButton = document.getElementById('start-btn');
+const nextButton = document.getElementById('next-btn');
+const resButton = document.getElementById("restart-btn");
+const questionContainerElement = document.getElementById('question-container');
+const questionElement = document.getElementById('question');
+const answerButtonsElement = document.getElementById('answer-buttons');
 const initialPage = document.getElementById("initialPage");
 const timer = document.getElementById("timer");
+const finalmessage = document.getElementById("finalMessage");
+const scorecounterEl = document.getElementById("scoreCounter");
 var count;
 
-//click event listeners and question index increment//
+
+
 let shuffledQuestions, currentQuestionIndex
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
   currentQuestionIndex++
   setNextQuestion()
 })
-
-//when startButton is pressed - game starts and so does the timer//
+resButton.addEventListener("click", initialGame)
 
 function startGame() {
 
@@ -25,12 +28,27 @@ function startGame() {
   shuffledQuestions = questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0
   questionContainerElement.classList.remove('hide')
+  scorecounterEl.classList.add("hide")
+  resButton.classList.add("hide")
+  finalmessage.classList.add("hide")
   setNextQuestion()
   startTime();
  
   
 }
-//Next question and resetting classes//
+
+function initialGame(){
+
+initialPage.classList.remove("hide")
+startButton.classList.remove("hide")
+scorecounterEl.classList.add("hide")
+timer.classList.add("hide")
+scorecounterEl.classList.add("hide")
+resButton.classList.add("hide")
+finalmessage.classList.add("hide")
+
+}
+
 function setNextQuestion() {
   resetState()
   showQuestion(shuffledQuestions[currentQuestionIndex])
@@ -59,8 +77,6 @@ function resetState() {
   }
 }
 
-//when answer button is selected
-
 function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
@@ -70,12 +86,7 @@ function selectAnswer(e) {
   })
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
-  } else { //when user finish selcting all questions
-    startButton.innerText = "Restart";
-    startButton.classList.remove("hide");
-    initialPage.innerHTML = "Thank you!";
-    initialPage.classList.remove("hide");
-    questionContainerElement.classList.add("hide");
+  } else {
     count = 0
   }
   if(correct){
@@ -99,8 +110,6 @@ function clearStatusClass(element) {
   element.classList.remove('correct')
   element.classList.remove('wrong')
 }
-
-//question and answer object
 
 const questions = [
   {
@@ -137,9 +146,9 @@ const questions = [
   }
 ]
 
-// Set the timer interval and initial count variable
+// Set the date we're counting down to
 function startTime(){ 
-count = 40;
+count = 20;
 var interval = setInterval(function(){
   document.getElementById('timer').innerHTML= count;
   count--;
@@ -147,17 +156,11 @@ var interval = setInterval(function(){
 
   if (count <= 0) {
     clearInterval(interval);
-    document.getElementById('timer').innerHTML='Done';
-    //startButton.innerText = "Restart";
-    startButton.classList.remove("hide");
-    initialPage.innerHTML = "Thank you!";
-    initialPage.classList.remove("hide");
+    timer.innerHTML = "0"
+    finalmessage.classList.remove("hide")
     questionContainerElement.classList.add("hide");
-    
-     
+    resButton.classList.remove("hide")
+    scorecounterEl.classList.remove("hide")  
   }
 }, 1000);
 }
-
-
-

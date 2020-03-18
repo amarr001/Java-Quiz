@@ -9,11 +9,14 @@
   <title>Quiz App</title>
 </head>
 <body>
-
-  <!--Container with Question and answers-->
   
   <div class="container">
+
+    <!--Timer-->
+
     <div class="timer" id="timer"><h4></h4></div>
+
+    <!--Question div-->
     <div id="question-container" class="hide">
       <div id="question">Question</div>
       <div id="answer-buttons" class="btn-grid">
@@ -23,6 +26,8 @@
         <button class="btn">Answer 4</button>
       </div>
     </div>
+
+    <!--Initial page-->
     <div id="initialPage" class="initial-page">
         <header><h1>Quiz Challenge</h1></header>
             <p class="intro"> Try to answer the following miscellaneous questions with the
@@ -31,11 +36,25 @@
                 your screentime by ten seconds!</p>
     </div>
 
-    <!--Buttons-->
-    
+    <!--Final page-->
+
+    <div id="finalMessage" class="hide">
+      <h3>Thank you for doing the Quiz!</h3>
+    </div>
+
+   <div id="scoreCounter" class="hide">
+    <h3>Your score:</h3>
+    <table>
+
+    </table>
+   </div>
+
+   <!--Buttons-->
+
     <div class="controls">
       <button id="start-btn" class="start-btn btn">Start</button>
       <button id="next-btn" class="next-btn btn hide">Next</button>
+      <button id="restart-btn" class="restart-btn btn hide">Click here to try again!</button>
     </div>
   </div>
 
