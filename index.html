@@ -40,11 +40,23 @@
 
     <div id="finalMessage" class="hide">
       <h3>Thank you for doing the Quiz!</h3>
+      <input type="text" placeholder="Type your name" id="name">
+      <input type="text" placeholder="Type today's date (day/month/year)" id="date">
+      <button id="record-btn">Click to record score</button>
     </div>
 
+
    <div id="scoreCounter" class="hide">
-    <h3>Your score:</h3>
-    <table>
+    <h3 id="scoreFinal">Your score:</h3>
+    <table id="scoreAdd">
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+      <th>Date</th>
+    </tr>
+    <tr id="scoreTable">
+
+    </tr>
 
     </table>
    </div>

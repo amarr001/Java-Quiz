@@ -8,8 +8,12 @@ const initialPage = document.getElementById("initialPage");
 const timer = document.getElementById("timer");
 const finalmessage = document.getElementById("finalMessage");
 const scorecounterEl = document.getElementById("scoreCounter");
-var count;
+const scoreTable = document.getElementById("scoreTable");
+const scoreFinalEl = document.getElementById("scoreFinal");
+var scoreAdd = document.getElementById("scoreAdd")
 
+var count;
+var score = 0;
 
 
 let shuffledQuestions, currentQuestionIndex
@@ -21,7 +25,7 @@ nextButton.addEventListener('click', () => {
 resButton.addEventListener("click", initialGame)
 
 function startGame() {
-
+  startTime();
   initialPage.classList.add('hide')
   timer.classList.remove("hide")
   startButton.classList.add('hide')
@@ -31,8 +35,9 @@ function startGame() {
   scorecounterEl.classList.add("hide")
   resButton.classList.add("hide")
   finalmessage.classList.add("hide")
+  score = 0;
   setNextQuestion()
-  startTime();
+  
  
   
 }
@@ -91,6 +96,8 @@ function selectAnswer(e) {
   }
   if(correct){
     count = count;
+    score++
+    
   }else{
     count = count -5;
   }
@@ -146,6 +153,53 @@ const questions = [
   }
 ]
 
+// Function to render the score table
+
+function ScoreRenderTable(){
+
+
+var newLine = document.createElement("tr")
+scoreAdd.appendChild(newLine)
+var recordBtn = document.getElementById("record-btn");
+recordBtn.addEventListener("click", function(){
+
+  var name = document.getElementById("name").value;
+  var date = document.getElementById("date").value;
+  var tableArray = [name, score, date];
+
+  for(i=0; i<tableArray.length; i++){
+
+    var scoreColumn = document.createElement("th")
+    scoreColumn.innerText = tableArray[i];
+    newLine.appendChild(scoreColumn)
+
+    localStorage.setItem("name", name);
+    localStorage.setItem("date", date);
+    localStorage.setItem("score", score);
+  
+  }  
+
+  
+})
+
+}
+
+//render last score
+
+function renderLastScore(){
+
+name = localStorage.getItem("name");
+date = localStorage.getItem("date");
+score = localStorage.getItem("score");
+
+//localStorage.setItem("name", name);
+//localStorage.setItem("date", date);
+//localStorage.setItem("score", score);
+
+}
+
+
+
 // Set the date we're counting down to
 function startTime(){ 
 count = 20;
@@ -157,10 +211,14 @@ var interval = setInterval(function(){
   if (count <= 0) {
     clearInterval(interval);
     timer.innerHTML = "0"
+    scoreFinalEl.innerHTML = "Your Score: " + score;
     finalmessage.classList.remove("hide")
     questionContainerElement.classList.add("hide");
     resButton.classList.remove("hide")
-    scorecounterEl.classList.remove("hide")  
+    scorecounterEl.classList.remove("hide") 
+    ScoreRenderTable();
   }
 }, 1000);
 }
+
+
