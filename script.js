@@ -157,46 +157,28 @@ const questions = [
 
 function ScoreRenderTable(){
 
-
-var newLine = document.createElement("tr")
-scoreAdd.appendChild(newLine)
 var recordBtn = document.getElementById("record-btn");
 recordBtn.addEventListener("click", function(){
+
 
   var name = document.getElementById("name").value;
   var date = document.getElementById("date").value;
   var tableArray = [name, score, date];
+  var newLine = document.createElement("tr")
+  scoreAdd.appendChild(newLine)
 
   for(i=0; i<tableArray.length; i++){
-
-    var scoreColumn = document.createElement("th")
+    
+    var scoreColumn = document.createElement("td")
     scoreColumn.innerText = tableArray[i];
     newLine.appendChild(scoreColumn)
-
-    localStorage.setItem("name", name);
-    localStorage.setItem("date", date);
-    localStorage.setItem("score", score);
   
   }  
-
   
 })
 
 }
 
-//render last score
-
-function renderLastScore(){
-
-name = localStorage.getItem("name");
-date = localStorage.getItem("date");
-score = localStorage.getItem("score");
-
-//localStorage.setItem("name", name);
-//localStorage.setItem("date", date);
-//localStorage.setItem("score", score);
-
-}
 
 
 
