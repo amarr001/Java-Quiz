@@ -11,11 +11,8 @@ const scorecounterEl = document.getElementById("scoreCounter");
 const scoreTable = document.getElementById("scoreTable");
 const scoreFinalEl = document.getElementById("scoreFinal");
 var scoreAdd = document.getElementById("scoreAdd")
-
 var count;
 var score = 0;
-
-
 let shuffledQuestions, currentQuestionIndex
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
@@ -23,7 +20,6 @@ nextButton.addEventListener('click', () => {
   setNextQuestion()
 })
 resButton.addEventListener("click", initialGame)
-
 function startGame() {
   startTime();
   initialPage.classList.add('hide')
@@ -37,13 +33,8 @@ function startGame() {
   finalmessage.classList.add("hide")
   score = 0;
   setNextQuestion()
-  
- 
-  
 }
-
 function initialGame(){
-
 initialPage.classList.remove("hide")
 startButton.classList.remove("hide")
 scorecounterEl.classList.add("hide")
@@ -51,14 +42,11 @@ timer.classList.add("hide")
 scorecounterEl.classList.add("hide")
 resButton.classList.add("hide")
 finalmessage.classList.add("hide")
-
 }
-
 function setNextQuestion() {
   resetState()
   showQuestion(shuffledQuestions[currentQuestionIndex])
 }
-
 function showQuestion(question) {
   questionElement.innerText = question.question
   question.answers.forEach(answer => {
@@ -70,10 +58,8 @@ function showQuestion(question) {
     }
     button.addEventListener('click', selectAnswer)
     answerButtonsElement.appendChild(button)
-   
   })
 }
-
 function resetState() {
   clearStatusClass(document.body)
   nextButton.classList.add('hide')
@@ -81,7 +67,6 @@ function resetState() {
     answerButtonsElement.removeChild(answerButtonsElement.firstChild)
   }
 }
-
 function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
@@ -97,27 +82,22 @@ function selectAnswer(e) {
   if(correct){
     count = count;
     score++
-    
   }else{
     count = count -5;
   }
 }
-
 function setStatusClass(element, correct) {
   clearStatusClass(element)
   if (correct) {
     element.classList.add('correct')
-  
   } else {
     element.classList.add('wrong')
   }
 }
-
 function clearStatusClass(element) {
   element.classList.remove('correct')
   element.classList.remove('wrong')
 }
-
 const questions = [
   {
     question: 'What is 2 + 2?',
@@ -152,31 +132,36 @@ const questions = [
     ]
   }
 ]
-
 // Function to render the score table
-
-function ScoreRenderTable(){
-
 var recordBtn = document.getElementById("record-btn");
 recordBtn.addEventListener("click", function(){
-
-
   var name = document.getElementById("name").value;
   var date = document.getElementById("date").value;
   var tableArray = [name, score, date];
   var newLine = document.createElement("tr")
   scoreAdd.appendChild(newLine)
-
   for(i=0; i<tableArray.length; i++){
-    
     var scoreColumn = document.createElement("td")
     scoreColumn.innerText = tableArray[i];
     newLine.appendChild(scoreColumn)
-  
   }  
-  
-})
-
+});
+// Set the date we're counting down to
+function startTime(){ 
+count = 20;
+var interval = setInterval(function(){
+  document.getElementById('timer').innerHTML= count;
+  count--;
+  if (count <= 0) {
+    clearInterval(interval);
+    timer.innerHTML = "0"
+    scoreFinalEl.innerHTML = "Your Score: " + score;
+    finalmessage.classList.remove("hide")
+    questionContainerElement.classList.add("hide");
+    resButton.classList.remove("hide")
+    scorecounterEl.classList.remove("hide") 
+  }
+}, 1000);
 }
 
 
